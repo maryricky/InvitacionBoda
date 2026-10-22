@@ -2,762 +2,1335 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#641c2b">
-<meta name="description" content="Invitación a la boda de María y Ricardo, el 27 de diciembre de 2026.">
-<title>María & Ricardo | Nuestra boda</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4b1024">
+  <meta name="description" content="Invitación de boda de María y Ricardo, 27 de diciembre de 2026.">
+  <title>María & Ricardo | Nuestra boda</title>
 
-<style>
-:root {
-  --vino: #641c2b;
-  --vino-oscuro: #35101c;
-  --dorado: #d8b56d;
-  --crema: #fff8ef;
-  --texto: #40252b;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body {
-  margin: 0;
-  background: var(--crema);
-  color: var(--texto);
-  font-family: Georgia, "Times New Roman", serif;
-}
-button, input, select { font: inherit; }
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-.portada {
-  position: fixed;
-  inset: 0;
-  z-index: 10;
-  display: grid;
-  place-items: center;
-  overflow: hidden;
-  text-align: center;
-  color: var(--crema);
-  background:
-    radial-gradient(circle at 20% 20%, #8e3549, transparent 35%),
-    radial-gradient(circle at 80% 80%, #8e3549, transparent 35%),
-    linear-gradient(135deg, var(--vino-oscuro), var(--vino));
-  transition: opacity 1s, visibility 1s;
-}
-.portada.cerrada {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-.portada::before, .portada::after {
-  content: "";
-  position: absolute;
-  width: 65vmin;
-  height: 65vmin;
-  border: 1px solid #d8b56d66;
-  border-radius: 50%;
-  animation: flotar 9s ease-in-out infinite;
-}
-.portada::after {
-  width: 90vmin;
-  height: 90vmin;
-  animation-delay: -4s;
-}
-.portada-contenido {
-  position: relative;
-  z-index: 1;
-  padding: 25px;
-  animation: aparecer 1.2s ease both;
-}
-.leyenda {
-  color: var(--dorado);
-  font: 12px Arial, sans-serif;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-}
-.portada h1, .hero h1 {
-  font-weight: normal;
-  line-height: 1.05;
-  font-size: clamp(3rem, 9vw, 6rem);
-  margin: 25px 0;
-}
-.amp {
-  color: var(--dorado);
-  font-style: italic;
-}
-.adorno {
-  color: var(--dorado);
-  font-size: 28px;
-  letter-spacing: .2em;
-  margin: 20px;
-}
-.boton {
-  display: inline-block;
-  padding: 14px 25px;
-  color: var(--vino-oscuro);
-  background: var(--dorado);
-  border: 1px solid var(--dorado);
-  text-decoration: none;
-  cursor: pointer;
-  transition: transform .2s, background .2s;
-}
-.boton:hover {
-  transform: translateY(-2px);
-  background: #ecd49b;
-}
-.boton-redondo { border-radius: 40px; }
+  <style>
+    :root {
+      --vino: #541329;
+      --vino-oscuro: #260914;
+      --vino-claro: #7b2d46;
+      --dorado: #d8b56d;
+      --dorado-claro: #f4dfaa;
+      --crema: #fff9f0;
+      --texto: #49343a;
+    }
 
-.particula {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background: var(--dorado);
-  border-radius: 50%;
-  animation: brillo 4s infinite;
-}
-.particula:nth-child(1) { left: 13%; top: 18%; }
-.particula:nth-child(2) { left: 80%; top: 25%; animation-delay: 1s; }
-.particula:nth-child(3) { left: 23%; top: 78%; animation-delay: 2s; }
-.particula:nth-child(4) { left: 88%; top: 73%; animation-delay: .7s; }
+    * {
+      box-sizing: border-box;
+    }
 
-.hero {
-  min-height: 92vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 90px 22px;
-  text-align: center;
-  color: var(--crema);
-  background:
-    linear-gradient(#260a13a8, #260a13a8),
-    radial-gradient(ellipse at center, #8b3448, #35101c);
-  position: relative;
-}
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 18px;
-  border: 1px solid #d8b56d99;
-  pointer-events: none;
-}
-.hero-contenido { position: relative; z-index: 1; }
-.hero h1 { font-size: clamp(3.2rem, 10vw, 7rem); }
-.fecha {
-  color: var(--dorado);
-  font: 13px Arial, sans-serif;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-}
-.intro {
-  max-width: 600px;
-  margin: 25px auto;
-  line-height: 1.9;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.seccion {
-  padding: 85px 22px;
-  text-align: center;
-}
-.seccion h2, .vestimenta h2, .hoteles h2 {
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  font-weight: normal;
-  color: var(--vino);
-  margin: 15px 0;
-}
-.subtitulo {
-  color: #916a3c;
-  font: 12px Arial, sans-serif;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-}
-.seccion p {
-  max-width: 700px;
-  margin: 15px auto;
-  line-height: 1.9;
-}
+    body {
+      margin: 0;
+      background: var(--crema);
+      color: var(--texto);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      line-height: 1.8;
+    }
 
-.cuenta {
-  display: flex;
-  justify-content: center;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin: 35px auto;
-}
-.unidad {
-  min-width: 80px;
-  padding: 20px 12px;
-  border: 1px solid var(--dorado);
-  background: #fffdf8;
-}
-.unidad strong {
-  display: block;
-  font-size: 2rem;
-  font-weight: normal;
-  color: var(--vino);
-}
-.unidad span {
-  font: 10px Arial, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .12em;
-}
+    body.no-scroll {
+      overflow: hidden;
+    }
 
-.detalles { background: #f2e8dc; }
-.tarjeta {
-  max-width: 700px;
-  margin: 30px auto 0;
-  padding: 30px 20px;
-  border: 1px solid var(--dorado);
-  background: #fffaf3;
-}
-.tarjeta h3 {
-  font-size: 1.6rem;
-  font-weight: normal;
-  color: var(--vino);
-}
+    button,
+    input,
+    select {
+      font: inherit;
+    }
 
-.regalos {
-  background: linear-gradient(135deg, #4a1421, #6d2537);
-  color: var(--crema);
-}
-.regalos h2 { color: #f3dca5; }
-.regalos .subtitulo { color: #e7c985; }
+    button,
+    a {
+      -webkit-tap-highlight-color: transparent;
+    }
 
-/* Código de vestimenta */
-.vestimenta {
-  background: #fff8ef;
-  padding: 85px 22px;
-  text-align: center;
-}
-.vestimenta-contenido {
-  max-width: 700px;
-  margin: 30px auto 0;
-  padding: 35px 22px;
-  border: 1px solid var(--dorado);
-  background: #fffdf8;
-}
-.icono-vestimenta {
-  font-size: 48px;
-  color: #b08a46;
-  margin-bottom: 15px;
-}
-.colores-prohibidos {
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  flex-wrap: wrap;
-  margin: 25px 0;
-}
-.color-prohibido {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font: 13px Arial, sans-serif;
-}
-.muestra-color {
-  width: 27px;
-  height: 27px;
-  border-radius: 50%;
-  border: 1px solid #c7b9ad;
-}
-.color-vino { background: #641c2b; }
-.color-blanco { background: #fff; }
+    a {
+      color: inherit;
+    }
 
-/* Hoteles */
-.hoteles {
-  background: #f2e8dc;
-  padding: 85px 22px;
-  text-align: center;
-}
-.lista-hoteles {
-  max-width: 1000px;
-  margin: 35px auto;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 18px;
-  text-align: left;
-}
-.hotel-card {
-  background: #fffdf8;
-  border: 1px solid var(--dorado);
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.hotel-card h3 {
-  color: var(--vino);
-  font-size: 1.3rem;
-  font-weight: normal;
-  margin: 0 0 12px;
-}
-.hotel-card p {
-  font-size: 14px;
-  margin: 0 0 18px;
-  line-height: 1.8;
-}
-.hotel-card a {
-  margin-top: auto;
-  display: inline-block;
-  padding: 11px 15px;
-  background: var(--vino);
-  color: var(--crema);
-  text-decoration: none;
-  font: 12px Arial, sans-serif;
-  letter-spacing: .04em;
-}
-.hotel-card a:hover { background: #8a3548; }
-.nota-hoteles {
-  max-width: 700px;
-  margin: 25px auto 0;
-  font-size: 13px;
-  color: #6e5550;
-}
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--dorado);
+      outline-offset: 4px;
+    }
 
-/* Confirmación */
-.confirmacion { background: #fffaf3; }
-.formulario {
-  max-width: 500px;
-  margin: 25px auto;
-  text-align: left;
-}
-.formulario label {
-  display: block;
-  margin: 16px 0 7px;
-  font: 12px Arial, sans-serif;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-.formulario input, .formulario select {
-  width: 100%;
-  padding: 13px;
-  border: 1px solid #cdbda9;
-  background: white;
-  color: var(--texto);
-  font: 16px Arial, sans-serif;
-}
-.formulario button {
-  width: 100%;
-  margin-top: 20px;
-}
+    .script {
+      font-family: 'Great Vibes', cursive;
+      font-weight: 400;
+    }
 
-.musica {
-  position: fixed;
-  z-index: 5;
-  right: 18px;
-  bottom: 18px;
-  width: 48px;
-  height: 48px;
-  border: 1px solid var(--dorado);
-  border-radius: 50%;
-  background: var(--vino);
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 18px #0002;
-}
-footer {
-  padding: 30px 15px;
-  text-align: center;
-  background: var(--vino-oscuro);
-  color: #e9d8c5;
-  line-height: 1.8;
-}
-.revelar {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .8s, transform .8s;
-}
-.revelar.visible {
-  opacity: 1;
-  transform: none;
-}
+    .serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
 
-@media (max-width: 480px) {
-  .seccion, .vestimenta, .hoteles { padding: 65px 17px; }
-  .unidad { min-width: 68px; padding: 15px 8px; }
-  .unidad strong { font-size: 1.7rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation: none !important;
-    scroll-behavior: auto !important;
-    transition: none !important;
-  }
-}
-</style>
+    .gold {
+      color: var(--dorado);
+    }
+
+    /* PORTADA Y SOBRE DIGITAL */
+
+    .cover {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow: auto;
+      background:
+        radial-gradient(ellipse at 50% 30%, rgba(126, 44, 69, .55), transparent 60%),
+        linear-gradient(145deg, #210811, #541329 55%, #2b0b17);
+      transition: opacity .8s ease, visibility .8s ease;
+    }
+
+    .cover.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .cover::before,
+    .cover::after {
+      content: "";
+      position: absolute;
+      pointer-events: none;
+      border: 1px solid rgba(216, 181, 109, .48);
+    }
+
+    .cover::before {
+      inset: 12px;
+    }
+
+    .cover::after {
+      inset: 19px;
+      border-color: rgba(216, 181, 109, .19);
+    }
+
+    .cover-content {
+      position: relative;
+      z-index: 2;
+      width: min(100%, 470px);
+      text-align: center;
+      color: var(--crema);
+      padding: 24px 12px;
+    }
+
+    .cover-kicker {
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--dorado-claro);
+    }
+
+    .cover-names {
+      margin: 8px 0 0;
+      font-size: clamp(48px, 11vw, 75px);
+      line-height: 1.1;
+    }
+
+    .cover-date {
+      margin: 12px 0 26px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .envelope-scene {
+      position: relative;
+      width: min(330px, 84vw);
+      height: 224px;
+      margin: 10px auto 25px;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      position: absolute;
+      inset: 30px 0 0;
+      height: 178px;
+      background: #f3e4c8;
+      border: 1px solid var(--dorado);
+      border-radius: 3px;
+      box-shadow: 0 15px 45px rgba(0, 0, 0, .3);
+    }
+
+    .envelope-back {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      background: #ead7b4;
+    }
+
+    .letter {
+      position: absolute;
+      z-index: 2;
+      left: 7%;
+      top: 18px;
+      width: 86%;
+      height: 151px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--vino);
+      background: #fffaf0;
+      border: 1px solid rgba(184, 142, 72, .55);
+      box-shadow: 0 2px 12px rgba(58, 26, 22, .12);
+      transition: transform 1s cubic-bezier(.2, .75, .25, 1);
+    }
+
+    .letter .letter-small {
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .letter .letter-name {
+      font-size: 31px;
+      line-height: 1.15;
+      margin: 4px 0;
+    }
+
+    .letter .letter-message {
+      font-size: 10px;
+      line-height: 1.5;
+      max-width: 240px;
+    }
+
+    .envelope-front {
+      position: absolute;
+      z-index: 3;
+      inset: 0;
+      background: #e7d1a8;
+      clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+      border-bottom: 1px solid #b38b4a;
+    }
+
+    .envelope-flap {
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100px;
+      background: #f5e6ca;
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+      transform-origin: top center;
+      transform: rotateX(0deg);
+      transition: transform .8s ease, z-index .1s .4s;
+      backface-visibility: visible;
+      filter: drop-shadow(0 2px 1px rgba(99, 65, 28, .2));
+    }
+
+    .seal {
+      position: absolute;
+      z-index: 5;
+      top: 72px;
+      left: 50%;
+      width: 43px;
+      height: 43px;
+      transform: translateX(-50%);
+      display: grid;
+      place-items: center;
+      border: 1px solid #a77d37;
+      border-radius: 50%;
+      background: var(--vino);
+      color: var(--dorado-claro);
+      font-family: 'Great Vibes', cursive;
+      font-size: 25px;
+      box-shadow: 0 3px 9px #43200d33;
+      transition: opacity .3s, transform .5s;
+    }
+
+    .envelope-scene.opened .envelope-flap {
+      transform: rotateX(180deg);
+      z-index: 1;
+    }
+
+    .envelope-scene.opened .letter {
+      transform: translateY(-105px);
+      transition-delay: .35s;
+    }
+
+    .envelope-scene.opened .seal {
+      opacity: 0;
+      transform: translateX(-50%) scale(.5);
+    }
+
+    .cover-instructions {
+      margin: 0 0 14px;
+      color: #f1dfc5;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .gold-button,
+    .outline-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border: 1px solid var(--dorado);
+      border-radius: 2px;
+      background: var(--dorado);
+      color: var(--vino-oscuro);
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .25s, background .25s, color .25s;
+    }
+
+    .gold-button:hover,
+    .outline-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .gold-button:disabled {
+      opacity: .55;
+      cursor: wait;
+    }
+
+    .outline-button {
+      background: transparent;
+      color: var(--dorado-claro);
+    }
+
+    .personal-message {
+      max-width: 390px;
+      margin: 8px auto 20px;
+      padding: 15px;
+      border-top: 1px solid #d8b56d66;
+      border-bottom: 1px solid #d8b56d66;
+      color: #fff3df;
+      animation: fadeUp .8s both;
+    }
+
+    .personal-message h2 {
+      margin: 0 0 8px;
+      font-size: 34px;
+      line-height: 1.1;
+      color: var(--dorado-claro);
+    }
+
+    .personal-message p {
+      margin: 5px 0;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .personal-message .recipient {
+      color: var(--dorado-claro);
+      font-weight: 600;
+    }
+
+    .cover-step {
+      display: none;
+    }
+
+    .cover-step.active {
+      display: block;
+      animation: fadeUp .7s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .spark {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--dorado-claro);
+      box-shadow: 0 0 12px 2px #d8b56d66;
+      animation: sparkle 3s infinite ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: .15; transform: scale(.7); }
+      50% { opacity: 1; transform: scale(1.5); }
+    }
+
+    /* INVITACIÓN */
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 20px;
+      text-align: center;
+      color: var(--crema);
+      background:
+        linear-gradient(180deg, rgba(39, 7, 20, .65), rgba(57, 11, 28, .89)),
+        linear-gradient(135deg, #7b2d46, #2b0b17);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(216, 181, 109, .65);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      width: min(100%, 700px);
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 10px;
+      color: var(--dorado-claro);
+    }
+
+    .hero h1 {
+      margin: 12px 0;
+      font-size: clamp(68px, 14vw, 112px);
+      line-height: .95;
+      font-weight: 400;
+    }
+
+    .hero-ampersand {
+      color: var(--dorado);
+      font-size: .7em;
+    }
+
+    .hero-subtitle {
+      margin: 20px auto;
+      max-width: 450px;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    .hero-date {
+      margin-top: 27px;
+      color: var(--dorado-claro);
+      letter-spacing: 3px;
+      font-size: 12px;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: min(430px, 85vw);
+      margin: 32px auto 0;
+      padding: 9px;
+      border: 1px solid var(--dorado);
+      background: rgba(255, 255, 255, .06);
+      box-shadow: 0 12px 45px rgba(0, 0, 0, .2);
+    }
+
+    .photo-frame::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid #d8b56d55;
+      pointer-events: none;
+    }
+
+    .couple-photo {
+      display: block;
+      width: 100%;
+      max-height: 520px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .photo-caption {
+      margin: 12px 0 0;
+      color: var(--dorado-claro);
+      font-family: 'Great Vibes', cursive;
+      font-size: 29px;
+    }
+
+    section.content-section {
+      padding: 75px 20px;
+    }
+
+    .section-inner {
+      width: min(100%, 820px);
+      margin: auto;
+      text-align: center;
+    }
+
+    .section-kicker {
+      color: #9a7040;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 6px 0 16px;
+      color: var(--vino);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(42px, 8vw, 61px);
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    .section-copy {
+      max-width: 620px;
+      margin: 0 auto 22px;
+      font-size: 13px;
+      line-height: 2;
+    }
+
+    .divider-ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 20px 0;
+      color: #b38b4a;
+    }
+
+    .divider-ornament::before,
+    .divider-ornament::after {
+      content: "";
+      width: 55px;
+      height: 1px;
+      background: #c7a465;
+    }
+
+    .countdown-section {
+      background: #f0e4d3;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      width: min(100%, 580px);
+      margin: 30px auto 0;
+    }
+
+    .count-box {
+      padding: 19px 8px;
+      border: 1px solid #d1b681;
+      background: #fffaf3;
+    }
+
+    .count-number {
+      display: block;
+      color: var(--vino);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 6vw, 43px);
+      line-height: 1.2;
+    }
+
+    .count-label {
+      display: block;
+      margin-top: 5px;
+      color: #886a48;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .event-card {
+      max-width: 590px;
+      margin: 30px auto;
+      padding: 28px;
+      border: 1px solid #d6bb82;
+      background: #fffaf3;
+    }
+
+    .event-icon {
+      font-size: 28px;
+      color: #9a7040;
+    }
+
+    .event-card h3 {
+      margin: 5px 0;
+      color: var(--vino);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 500;
+    }
+
+    .event-card p {
+      margin: 6px 0 17px;
+      font-size: 12px;
+    }
+
+    .event-card .gold-button {
+      margin-top: 5px;
+    }
+
+    .gift-section {
+      background: var(--vino);
+      color: var(--crema);
+    }
+
+    .gift-section .section-title {
+      color: var(--dorado-claro);
+    }
+
+    .gift-section .section-kicker {
+      color: var(--dorado);
+    }
+
+    .gift-section .section-copy {
+      max-width: 680px;
+    }
+
+    .gift-symbol {
+      margin: 15px 0;
+      color: var(--dorado);
+      font-size: 34px;
+    }
+
+    .dress-card {
+      max-width: 600px;
+      margin: 28px auto 0;
+      padding: 26px;
+      border: 1px solid #d6bb82;
+      background: #fffaf3;
+    }
+
+    .dress-card h3 {
+      margin: 0;
+      color: var(--vino);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 500;
+    }
+
+    .color-swatches {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin: 18px 0;
+    }
+
+    .swatch-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      font-size: 10px;
+    }
+
+    .swatch {
+      width: 42px;
+      height: 42px;
+      border: 1px solid #c6b6a3;
+      border-radius: 50%;
+    }
+
+    .hotel-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      max-width: 690px;
+      margin: 28px auto 0;
+    }
+
+    .hotel-link {
+      display: block;
+      padding: 17px 12px;
+      border: 1px solid #d8c6a8;
+      background: #fffaf3;
+      color: var(--vino);
+      text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+
+    .hotel-link:hover {
+      transform: translateY(-2px);
+      background: #f4ead9;
+    }
+
+    .hotel-link strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    .hotel-link span {
+      display: block;
+      margin-top: 5px;
+      font-size: 10px;
+    }
+
+    .rsvp-section {
+      background: #f0e4d3;
+    }
+
+    .rsvp-form {
+      display: grid;
+      gap: 14px;
+      max-width: 490px;
+      margin: 28px auto 0;
+      text-align: left;
+    }
+
+    .rsvp-form label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--vino);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .rsvp-form input,
+    .rsvp-form select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #cbb99d;
+      border-radius: 0;
+      background: #fffaf3;
+      color: var(--texto);
+    }
+
+    .rsvp-form .gold-button {
+      width: 100%;
+      margin-top: 6px;
+    }
+
+    .small-note {
+      font-size: 10px;
+      opacity: .8;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 44px 20px;
+      text-align: center;
+      color: var(--crema);
+      background: var(--vino-oscuro);
+    }
+
+    footer .script {
+      color: var(--dorado-claro);
+      font-size: 43px;
+    }
+
+    footer p {
+      margin: 5px 0;
+      font-size: 10px;
+      letter-spacing: 1px;
+    }
+
+    .music-control {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 47px;
+      height: 47px;
+      border: 1px solid var(--dorado);
+      border-radius: 50%;
+      color: var(--dorado-claro);
+      background: var(--vino);
+      box-shadow: 0 4px 15px #0002;
+      cursor: pointer;
+    }
+
+    .music-control.visible {
+      display: flex;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 540px) {
+      section.content-section {
+        padding: 58px 18px;
+      }
+
+      .cover-content {
+        padding: 15px 5px;
+      }
+
+      .cover-names {
+        font-size: 53px;
+      }
+
+      .envelope-scene {
+        transform: scale(.92);
+        transform-origin: center;
+        margin-top: 0;
+        margin-bottom: 10px;
+      }
+
+      .countdown {
+        gap: 6px;
+      }
+
+      .count-box {
+        padding: 15px 3px;
+      }
+
+      .count-label {
+        font-size: 8px;
+        letter-spacing: 0;
+      }
+
+      .event-card,
+      .dress-card {
+        padding: 20px 15px;
+      }
+
+      .hotel-list {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 85vh;
+        padding: 60px 20px;
+      }
+
+      .hero h1 {
+        font-size: 76px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
 </head>
 
-<body>
+<body class="no-scroll">
 
-<!-- PORTADA ANIMADA -->
-<div class="portada" id="portada">
-  <span class="particula"></span>
-  <span class="particula"></span>
-  <span class="particula"></span>
-  <span class="particula"></span>
+  <!-- PORTADA CON SOBRE DIGITAL -->
+  <div class="cover" id="cover">
+    <span class="spark" style="top:13%;left:15%;animation-delay:.2s"></span>
+    <span class="spark" style="top:22%;right:17%;animation-delay:1.1s"></span>
+    <span class="spark" style="bottom:18%;left:22%;animation-delay:1.8s"></span>
+    <span class="spark" style="bottom:25%;right:14%;animation-delay:.7s"></span>
 
-  <div class="portada-contenido">
-    <div class="leyenda">Una celebración de amor</div>
-    <h1>María <span class="amp">&</span><br>Ricardo</h1>
-    <div class="adorno">✧ ❦ ✧</div>
-    <p>Tenemos algo especial que compartir contigo</p>
-    <button class="boton boton-redondo" id="abrir">
-      Abrir invitación ✨
-    </button>
-  </div>
-</div>
+    <div class="cover-content">
+      <div class="cover-step active" id="stepEnvelope">
+        <div class="cover-kicker">Una invitación especial</div>
+        <h1 class="cover-names script">María <span class="gold">&</span> Ricardo</h1>
+        <div class="cover-date">27 · Diciembre · 2026</div>
 
-<!-- Musica.mpeg debe estar junto a index.html -->
-<audio id="musica" src="Musica.mpeg" preload="auto" loop></audio>
-
-<button class="musica" id="controlMusica"
-        aria-label="Pausar música"
-        title="Pausar o reproducir música" hidden>Ⅱ</button>
-
-<main>
-  <!-- PRESENTACIÓN -->
-  <header class="hero">
-    <div class="hero-contenido">
-      <div class="leyenda">¡Nos casamos!</div>
-      <h1>María <span class="amp">&</span><br>Ricardo</h1>
-      <div class="adorno">✧ ❦ ✧</div>
-      <p class="intro">
-        Hay momentos que se vuelven inolvidables cuando los compartimos
-        con las personas que queremos. Nos encantaría que nos acompañaras
-        en el comienzo de nuestra historia juntos.
-      </p>
-      <p class="fecha">27 · Diciembre · 2026 &nbsp; | &nbsp; 3:00 p. m.</p>
-    </div>
-  </header>
-
-  <!-- CUENTA REGRESIVA -->
-  <section class="seccion revelar">
-    <div class="subtitulo">Cuenta regresiva</div>
-    <h2>Falta poco para nuestro gran día</h2>
-
-    <div class="cuenta" aria-live="polite">
-      <div class="unidad"><strong id="dias">—</strong><span>Días</span></div>
-      <div class="unidad"><strong id="horas">—</strong><span>Horas</span></div>
-      <div class="unidad"><strong id="minutos">—</strong><span>Minutos</span></div>
-      <div class="unidad"><strong id="segundos">—</strong><span>Segundos</span></div>
-    </div>
-
-    <p id="mensajeCuenta">Cada día nos acerca a una fecha muy especial.</p>
-  </section>
-
-  <!-- UBICACIÓN -->
-  <section class="seccion detalles revelar">
-    <div class="subtitulo">Nos encantará verte</div>
-    <h2>Detalles del evento</h2>
-
-    <div class="tarjeta">
-      <div class="adorno">✧</div>
-      <h3>La celebración</h3>
-      <p><strong>Domingo, 27 de diciembre de 2026</strong></p>
-      <p>3:00 p. m.</p>
-      <p>Consulta la ubicación exacta en el mapa para planear tu llegada.</p>
-      <a class="boton"
-         href="https://maps.app.goo.gl/1yM4By1HhzDegsDDA?g_st=aw"
-         target="_blank" rel="noopener noreferrer">
-        Ver ubicación en Google Maps
-      </a>
-    </div>
-  </section>
-
-  <!-- MESA DE REGALOS -->
-  <section class="seccion regalos revelar">
-    <div class="subtitulo">Con cariño</div>
-    <h2>Mesa de regalos</h2>
-    <div class="adorno">✧ ❦ ✧</div>
-    <p>
-      El mejor regalo es compartir este día con ustedes. Si desean obsequiarnos
-      algo, una lluvia de sobres será nuestra manera favorita de recibir sus
-      buenos deseos y apoyo para comenzar esta nueva etapa juntos. Gracias por
-      ser parte de nuestra historia de amor.
-    </p>
-  </section>
-
-  <!-- CÓDIGO DE VESTIMENTA -->
-  <section class="vestimenta revelar">
-    <div class="subtitulo">Una ocasión especial</div>
-    <h2>Código de vestimenta</h2>
-
-    <div class="vestimenta-contenido">
-      <div class="icono-vestimenta">♔</div>
-      <h3 style="color:#641c2b;font-weight:normal;font-size:1.6rem;">
-        Formal
-      </h3>
-
-      <p>
-        Nos encantará compartir este día tan especial contigo.
-        Te invitamos a vestir de manera formal y elegante para
-        celebrar juntos este momento inolvidable.
-      </p>
-
-      <p><strong>Por favor, evita los siguientes colores:</strong></p>
-
-      <div class="colores-prohibidos">
-        <div class="color-prohibido">
-          <span class="muestra-color color-vino"></span>
-          <strong>Vino</strong>
+        <div class="envelope-scene" id="envelopeScene" aria-label="Sobre de invitación">
+          <div class="envelope">
+            <div class="envelope-back"></div>
+            <div class="letter">
+              <div class="letter-small">Con todo nuestro cariño</div>
+              <div class="letter-name script">¡Te invitamos!</div>
+              <div class="letter-message">Nos encantaría compartir contigo uno de los días más importantes de nuestras vidas.</div>
+            </div>
+            <div class="envelope-front"></div>
+            <div class="envelope-flap"></div>
+            <div class="seal">M <span style="font-size:13px">&</span> R</div>
+          </div>
         </div>
 
-        <div class="color-prohibido">
-          <span class="muestra-color color-blanco"></span>
-          <strong>Blanco</strong>
-        </div>
+        <p class="cover-instructions">Tenemos algo especial para ti</p>
+        <button class="gold-button" id="openInvitation" type="button">
+          ✉ Abrir invitación
+        </button>
       </div>
 
-      <p>
-        El color vino y el blanco estarán reservados para la novia.
-        ¡Gracias por ayudarnos a hacer de este día una celebración
-        hermosa e inolvidable!
-      </p>
+      <div class="cover-step" id="stepMessage">
+        <div class="cover-kicker">Con amor, para ti</div>
+        <div class="personal-message">
+          <h2 class="script">¡Nos casamos!</h2>
+          <p>Querido/a</p>
+          <p class="recipient" id="guestName">familiar y amigo/a</p>
+          <p>
+            Nos llena de alegría invitarte a celebrar el comienzo de nuestra
+            nueva historia. Tu presencia hará que este día sea todavía más
+            especial.
+          </p>
+          <p class="script" style="font-size:29px;color:#f4dfaa">
+            María & Ricardo
+          </p>
+        </div>
+        <button class="gold-button" id="enterInvitation" type="button">
+          Entrar a la invitación →
+        </button>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- HOTELES CERCANOS -->
-  <section class="hoteles revelar">
-    <div class="subtitulo">Para tu comodidad</div>
-    <h2>Hoteles cercanos</h2>
+  <!-- AUDIO: debe estar junto al index.html -->
+  <audio id="musica" src="Musica.mpeg" preload="auto" loop></audio>
 
-    <p>
-      Si vienes de fuera, consulta estas búsquedas de hospedaje
-      en San Mateo Atenco y sus alrededores.
-    </p>
+  <button class="music-control" id="musicToggle" type="button"
+          aria-label="Pausar música" title="Pausar o reproducir música">
+    <span id="musicIcon">♫</span>
+  </button>
 
-    <div class="lista-hoteles">
-
-      <article class="hotel-card">
-        <h3>Hoteles en San Mateo Atenco</h3>
-        <p>
-          Consulta establecimientos en el municipio y compara
-          distancias con el lugar de la celebración.
+  <main>
+    <!-- PORTADA PRINCIPAL Y FOTO -->
+    <header class="hero" id="inicio">
+      <div class="hero-inner">
+        <div class="eyebrow">¡Nos casamos!</div>
+        <h1 class="script">María <span class="hero-ampersand">&</span><br>Ricardo</h1>
+        <p class="hero-subtitle">
+          Hay momentos que se vuelven inolvidables cuando los compartimos
+          con las personas que queremos.
         </p>
-        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+San+Mateo+Atenco"
-           target="_blank" rel="noopener noreferrer">
-          VER HOTELES
-        </a>
-      </article>
+        <div class="divider-ornament">♡</div>
+        <div class="hero-date">DOMINGO · 27 DE DICIEMBRE DE 2026 · 3:00 P. M.</div>
 
-      <article class="hotel-card">
-        <h3>Hoteles en Paseo Tollocan</h3>
-        <p>
-          Busca opciones de hospedaje sobre esta vía y en la
-          zona cercana a San Mateo Atenco.
+        <div class="photo-frame">
+          <img class="couple-photo"
+               src="fotoboda.jpeg"
+               alt="Fotografía de María y Ricardo juntos"
+               loading="eager">
+        </div>
+        <p class="photo-caption">Una historia, un amor, toda una vida</p>
+      </div>
+    </header>
+
+    <!-- MENSAJE DE BIENVENIDA -->
+    <section class="content-section">
+      <div class="section-inner reveal">
+        <div class="section-kicker">Nuestro gran día</div>
+        <h2 class="section-title">¡Queremos compartirlo contigo!</h2>
+        <div class="divider-ornament">❦</div>
+        <p class="section-copy">
+          Con mucha ilusión queremos celebrar el amor que nos une y comenzar
+          esta nueva etapa rodeados de nuestras familias y amistades.
+          Nos hará muy felices contar con tu presencia en un día tan especial.
         </p>
-        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+Paseo+Tollocan+Toluca"
-           target="_blank" rel="noopener noreferrer">
-          VER HOTELES
-        </a>
-      </article>
-
-      <article class="hotel-card">
-        <h3>Hoteles cerca del aeropuerto de Toluca</h3>
-        <p>
-          Una alternativa para quienes llegan de otras ciudades
-          y prefieren alojarse cerca del aeropuerto.
+        <p class="script" style="font-size:36px;color:#7b2d46">
+          ¡Te esperamos!
         </p>
-        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+cerca+del+Aeropuerto+de+Toluca"
-           target="_blank" rel="noopener noreferrer">
-          VER HOTELES
-        </a>
-      </article>
+      </div>
+    </section>
 
-      <article class="hotel-card">
-        <h3>Hoteles en Metepec</h3>
-        <p>
-          Explora alojamientos en el municipio vecino y revisa
-          cuál resulta más conveniente para tu traslado.
+    <!-- CUENTA REGRESIVA -->
+    <section class="content-section countdown-section">
+      <div class="section-inner reveal">
+        <div class="section-kicker">La cuenta regresiva</div>
+        <h2 class="section-title">Cada vez falta menos</h2>
+        <p class="section-copy">
+          El comienzo de nuestra nueva aventura está cada vez más cerca.
         </p>
-        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+Metepec+Estado+de+Mexico"
-           target="_blank" rel="noopener noreferrer">
-          VER HOTELES
-        </a>
-      </article>
 
-      <article class="hotel-card">
-        <h3>Hoteles en Toluca</h3>
-        <p>
-          Revisa hoteles en Toluca para comparar tarifas,
-          servicios y disponibilidad.
+        <div class="countdown" aria-label="Cuenta regresiva para la boda">
+          <div class="count-box">
+            <span class="count-number" id="days">000</span>
+            <span class="count-label">Días</span>
+          </div>
+          <div class="count-box">
+            <span class="count-number" id="hours">00</span>
+            <span class="count-label">Horas</span>
+          </div>
+          <div class="count-box">
+            <span class="count-number" id="minutes">00</span>
+            <span class="count-label">Minutos</span>
+          </div>
+          <div class="count-box">
+            <span class="count-number" id="seconds">00</span>
+            <span class="count-label">Segundos</span>
+          </div>
+        </div>
+        <p id="countdownMessage" class="small-note"></p>
+      </div>
+    </section>
+
+    <!-- UBICACIÓN -->
+    <section class="content-section">
+      <div class="section-inner reveal">
+        <div class="section-kicker">Acompáñanos</div>
+        <h2 class="section-title">Ceremonia y celebración</h2>
+        <div class="divider-ornament">♡</div>
+
+        <div class="event-card">
+          <div class="event-icon">⌖</div>
+          <h3>El gran día</h3>
+          <p>
+            <strong>27 de diciembre de 2026</strong><br>
+            3:00 p. m.
+          </p>
+          <p>
+            Consulta la ubicación y las indicaciones para llegar.
+          </p>
+          <a class="gold-button"
+             href="https://maps.app.goo.gl/1yM4By1HhzDegsDDA?g_st=aw"
+             target="_blank" rel="noopener noreferrer">
+            Ver ubicación en Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGALOS -->
+    <section class="content-section gift-section">
+      <div class="section-inner reveal">
+        <div class="section-kicker">Un detalle de corazón</div>
+        <h2 class="section-title">Mesa de regalos</h2>
+        <div class="gift-symbol">♡</div>
+        <p class="section-copy">
+          El mejor regalo es compartir este día con ustedes. Si desean obsequiarnos algo, una lluvia de sobres será nuestra manera favorita de recibir sus buenos deseos y apoyo para comenzar esta nueva etapa juntos. Gracias por ser parte de nuestra historia de amor.
         </p>
-        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+Toluca+Estado+de+Mexico"
-           target="_blank" rel="noopener noreferrer">
-          VER HOTELES
-        </a>
-      </article>
+      </div>
+    </section>
 
-      <article class="hotel-card">
-        <h3>Más opciones de hospedaje</h3>
-        <p>
-          Abre el mapa para explorar alojamientos, revisar
-          opiniones y consultar cómo llegar.
+    <!-- CÓDIGO DE VESTIMENTA -->
+    <section class="content-section">
+      <div class="section-inner reveal">
+        <div class="section-kicker">Para una ocasión especial</div>
+        <h2 class="section-title">Código de vestimenta</h2>
+
+        <div class="dress-card">
+          <h3>Formal</h3>
+          <p>
+            Nos encantará verte con un atuendo formal para celebrar juntos.
+          </p>
+
+          <div class="color-swatches">
+            <div class="swatch-item">
+              <span class="swatch" style="background:#541329"></span>
+              <span>Vino</span>
+            </div>
+            <div class="swatch-item">
+              <span class="swatch" style="background:#fff;border-color:#d4c8b8"></span>
+              <span>Blanco</span>
+            </div>
+          </div>
+
+          <p>
+            Te pedimos evitar los colores vino y blanco, ya que estarán
+            reservados para la novia.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOTELES Y ALOJAMIENTO -->
+    <section class="content-section countdown-section">
+      <div class="section-inner reveal">
+        <div class="section-kicker">Planea tu visita</div>
+        <h2 class="section-title">Opciones de hospedaje</h2>
+        <p class="section-copy">
+          Si vienes de otra ciudad, aquí puedes consultar alojamientos en
+          diferentes zonas cercanas. Los enlaces muestran resultados de
+          búsqueda en Google Maps; revisa disponibilidad, precios y distancia
+          antes de reservar.
         </p>
-        <a href="https://www.google.com/maps/search/hoteles+cerca+de+San+Mateo+Atenco/"
-           target="_blank" rel="noopener noreferrer">
-          EXPLORAR MAPA
-        </a>
-      </article>
 
-    </div>
+        <div class="hotel-list">
+          <a class="hotel-link"
+             href="https://www.google.com/maps/search/?api=1&query=hoteles+San+Mateo+Atenco"
+             target="_blank" rel="noopener noreferrer">
+            <strong>San Mateo Atenco</strong>
+            <span>Consultar hoteles cercanos ↗</span>
+          </a>
 
-    <p class="nota-hoteles">
-      Los enlaces abren búsquedas en Google Maps; no representan
-      reservaciones confirmadas. Verifica directamente la dirección,
-      disponibilidad, tarifas y distancia antes de reservar.
-    </p>
-  </section>
+          <a class="hotel-link"
+             href="https://www.google.com/maps/search/?api=1&query=hoteles+Paseo+Tollocan+Toluca"
+             target="_blank" rel="noopener noreferrer">
+            <strong>Paseo Tollocan</strong>
+            <span>Consultar hoteles cercanos ↗</span>
+          </a>
 
-  <!-- CONFIRMACIÓN POR WHATSAPP -->
-  <section class="seccion confirmacion revelar" id="confirmar">
-    <div class="subtitulo">Por favor, confirma tu asistencia</div>
-    <h2>¿Nos acompañas?</h2>
-    <p>
-      Completa tus datos y se abrirá WhatsApp con la confirmación
-      lista para enviar.
-    </p>
+          <a class="hotel-link"
+             href="https://www.google.com/maps/search/?api=1&query=hoteles+cerca+del+Aeropuerto+de+Toluca"
+             target="_blank" rel="noopener noreferrer">
+            <strong>Aeropuerto de Toluca</strong>
+            <span>Consultar hoteles cercanos ↗</span>
+          </a>
 
-    <form class="formulario" id="formulario">
-      <label for="nombreInvitado">Nombre de quien confirma</label>
-      <input id="nombreInvitado" type="text" maxlength="100"
-             placeholder="Escribe tu nombre" required>
+          <a class="hotel-link"
+             href="https://www.google.com/maps/search/?api=1&query=hoteles+Metepec+Estado+de+Mexico"
+             target="_blank" rel="noopener noreferrer">
+            <strong>Metepec</strong>
+            <span>Consultar hoteles cercanos ↗</span>
+          </a>
 
-      <label for="cantidad">Número total de personas que asistirán</label>
-      <select id="cantidad" required>
-        <option value="1">1 persona</option>
-        <option value="2">2 personas</option>
-        <option value="3">3 personas</option>
-        <option value="4">4 personas</option>
-        <option value="5">5 personas</option>
-        <option value="6">6 personas</option>
-        <option value="7">7 personas</option>
-        <option value="8">8 personas</option>
-        <option value="9">9 personas</option>
-        <option value="10">10 personas</option>
-      </select>
+          <a class="hotel-link"
+             href="https://www.google.com/maps/search/?api=1&query=hoteles+Toluca+Estado+de+Mexico"
+             target="_blank" rel="noopener noreferrer">
+            <strong>Toluca</strong>
+            <span>Consultar hoteles cercanos ↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
 
-      <button class="boton" type="submit">Confirmar por WhatsApp</button>
-    </form>
-  </section>
-</main>
+    <!-- CONFIRMACIÓN POR WHATSAPP -->
+    <section class="content-section rsvp-section" id="confirmar">
+      <div class="section-inner reveal">
+        <div class="section-kicker">Tu presencia es importante</div>
+        <h2 class="section-title">Confirma tu asistencia</h2>
+        <p class="section-copy">
+          Por favor, indícanos tu nombre y cuántas personas asistirán.
+          Al continuar, se abrirá WhatsApp con tu confirmación preparada
+          para enviarla.
+        </p>
 
-<footer>
-  Con todo nuestro cariño,<br>
-  <strong>María & Ricardo</strong><br>
-  27 de diciembre de 2026
-</footer>
+        <form class="rsvp-form" id="rsvpForm">
+          <div>
+            <label for="nombre">Nombre de quien confirma</label>
+            <input id="nombre" name="nombre" type="text"
+                   placeholder="Escribe tu nombre completo"
+                   autocomplete="name" maxlength="100" required>
+          </div>
 
-<script>
-const portada = document.getElementById("portada");
-const musica = document.getElementById("musica");
-const controlMusica = document.getElementById("controlMusica");
+          <div>
+            <label for="personas">Número total de personas</label>
+            <select id="personas" name="personas" required>
+              <option value="1">1 persona</option>
+              <option value="2" selected>2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+              <option value="7">7 personas</option>
+              <option value="8">8 personas</option>
+              <option value="9">9 personas</option>
+              <option value="10">10 personas</option>
+            </select>
+          </div>
 
-document.getElementById("abrir").addEventListener("click", async () => {
-  portada.classList.add("cerrada");
-  controlMusica.hidden = false;
+          <button class="gold-button" type="submit">
+            Confirmar por WhatsApp
+          </button>
 
-  try {
-    await musica.play();
-    controlMusica.textContent = "Ⅱ";
-    controlMusica.setAttribute("aria-label", "Pausar música");
-  } catch (error) {
-    controlMusica.textContent = "▶";
-    controlMusica.setAttribute("aria-label", "Reproducir música");
-  }
-});
+          <p class="small-note">
+            La confirmación se enviará mediante WhatsApp. Esta página no
+            almacena las respuestas por sí misma.
+          </p>
+        </form>
+      </div>
+    </section>
 
-controlMusica.addEventListener("click", async () => {
-  if (musica.paused) {
-    try {
-      await musica.play();
-      controlMusica.textContent = "Ⅱ";
-      controlMusica.setAttribute("aria-label", "Pausar música");
-    } catch (error) {
-      alert("No se pudo reproducir la música. Verifica que Musica.mpeg esté junto a index.html.");
+    <!-- PIE -->
+    <footer>
+      <div class="script">María & Ricardo</div>
+      <p>27 · DICIEMBRE · 2026</p>
+      <p>CON AMOR, PARA SIEMPRE ♡</p>
+    </footer>
+  </main>
+
+  <script>
+    // PERSONALIZACIÓN DEL INVITADO MEDIANTE LA URL
+    const params = new URLSearchParams(window.location.search);
+    const invitado = (params.get('invitado') || '').trim();
+    const personasURL = params.get('personas');
+
+    const guestName = document.getElementById('guestName');
+    const nombreInput = document.getElementById('nombre');
+    const personasSelect = document.getElementById('personas');
+
+    if (invitado) {
+      const nombreSeguro = invitado.slice(0, 100);
+      guestName.textContent = nombreSeguro;
+      nombreInput.value = nombreSeguro;
+    } else {
+      guestName.textContent = 'familiares y amigos';
     }
-  } else {
-    musica.pause();
-    controlMusica.textContent = "▶";
-    controlMusica.setAttribute("aria-label", "Reproducir música");
-  }
-});
 
-// Cuenta regresiva: 27 de diciembre de 2026 a las 3:00 p. m. (UTC-6)
-const fechaBoda = new Date("2026-12-27T15:00:00-06:00").getTime();
+    if (personasURL && /^[1-9]$|^10$/.test(personasURL)) {
+      personasSelect.value = personasURL;
+    }
 
-function actualizarCuenta() {
-  const diferencia = fechaBoda - Date.now();
+    // SOBRE DIGITAL Y MÚSICA
+    const cover = document.getElementById('cover');
+    const envelopeScene = document.getElementById('envelopeScene');
+    const stepEnvelope = document.getElementById('stepEnvelope');
+    const stepMessage = document.getElementById('stepMessage');
+    const openInvitation = document.getElementById('openInvitation');
+    const enterInvitation = document.getElementById('enterInvitation');
+    const musica = document.getElementById('musica');
+    const musicToggle = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicIcon');
 
-  if (diferencia <= 0) {
-    ["dias", "horas", "minutos", "segundos"].forEach(id => {
-      document.getElementById(id).textContent = "0";
+    let envelopeOpened = false;
+    let invitationEntered = false;
+
+    openInvitation.addEventListener('click', async () => {
+      if (envelopeOpened) return;
+
+      envelopeOpened = true;
+      openInvitation.disabled = true;
+      openInvitation.textContent = 'Abriendo tu invitación...';
+
+      // El navegador permite iniciar audio a partir de esta interacción.
+      try {
+        await musica.play();
+        musicIcon.textContent = '♫';
+        musicToggle.setAttribute('aria-label', 'Pausar música');
+      } catch (error) {
+        // Si el navegador bloquea el audio, se podrá iniciar con el control.
+        musicIcon.textContent = '▶';
+        musicToggle.setAttribute('aria-label', 'Reproducir música');
+      }
+
+      envelopeScene.classList.add('opened');
+
+      window.setTimeout(() => {
+        stepEnvelope.classList.remove('active');
+        stepMessage.classList.add('active');
+      }, 1050);
     });
-    document.getElementById("mensajeCuenta").textContent =
-      "¡Hoy celebramos nuestro amor! Gracias por acompañarnos.";
-    return;
-  }
 
-  document.getElementById("dias").textContent =
-    Math.floor(diferencia / 86400000);
-  document.getElementById("horas").textContent =
-    Math.floor((diferencia % 86400000) / 3600000);
-  document.getElementById("minutos").textContent =
-    Math.floor((diferencia % 3600000) / 60000);
-  document.getElementById("segundos").textContent =
-    Math.floor((diferencia % 60000) / 1000);
-}
+    enterInvitation.addEventListener('click', () => {
+      if (invitationEntered) return;
+      invitationEntered = true;
 
-actualizarCuenta();
-setInterval(actualizarCuenta, 1000);
+      cover.classList.add('hidden');
+      document.body.classList.remove('no-scroll');
+      musicToggle.classList.add('visible');
 
-// Confirmación de asistencia por WhatsApp
-document.getElementById("formulario").addEventListener("submit", event => {
-  event.preventDefault();
+      window.setTimeout(() => {
+        cover.style.display = 'none';
+      }, 850);
+    });
 
-  const nombre = document.getElementById("nombreInvitado").value.trim();
-  const cantidad = document.getElementById("cantidad").value;
-  if (!nombre) return;
+    musicToggle.addEventListener('click', async () => {
+      if (musica.paused) {
+        try {
+          await musica.play();
+          musicIcon.textContent = '♫';
+          musicToggle.setAttribute('aria-label', 'Pausar música');
+        } catch (error) {
+          musicIcon.textContent = '▶';
+        }
+      } else {
+        musica.pause();
+        musicIcon.textContent = '▶';
+        musicToggle.setAttribute('aria-label', 'Reproducir música');
+      }
+    });
 
-  const mensaje =
-    `¡Hola! Confirmo mi asistencia a la boda de María y Ricardo.\n\n` +
-    `Nombre: ${nombre}\n` +
-    `Total de personas que asistirán: ${cantidad}.`;
+    musica.addEventListener('ended', () => {
+      musicIcon.textContent = '▶';
+    });
 
-  const url = "https://wa.me/525638830474?text=" +
-    encodeURIComponent(mensaje);
+    // CUENTA REGRESIVA
+    // Fecha local de México (UTC-6).
+    const fechaBoda = new Date('2026-12-27T15:00:00-06:00').getTime();
 
-  window.open(url, "_blank", "noopener,noreferrer");
-});
+    function actualizarCuenta() {
+      const diferencia = fechaBoda - Date.now();
 
-// Opcional: precargar datos con
-// ?invitado=Ana%20Pérez&personas=2
-const parametros = new URLSearchParams(window.location.search);
+      if (diferencia <= 0) {
+        document.getElementById('days').textContent = '000';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        document.getElementById('countdownMessage').textContent =
+          '¡Hoy celebramos nuestro gran día!';
+        return;
+      }
 
-if (parametros.has("invitado")) {
-  document.getElementById("nombreInvitado").value =
-    parametros.get("invitado");
-}
+      const dias = Math.floor(diferencia / 86400000);
+      const horas = Math.floor((diferencia % 86400000) / 3600000);
+      const minutos = Math.floor((diferencia % 3600000) / 60000);
+      const segundos = Math.floor((diferencia % 60000) / 1000);
 
-if (parametros.has("personas")) {
-  const personas = parametros.get("personas");
-  const opciones = [...document.getElementById("cantidad").options];
+      document.getElementById('days').textContent =
+        String(dias).padStart(3, '0');
+      document.getElementById('hours').textContent =
+        String(horas).padStart(2, '0');
+      document.getElementById('minutes').textContent =
+        String(minutos).padStart(2, '0');
+      document.getElementById('seconds').textContent =
+        String(segundos).padStart(2, '0');
 
-  if (opciones.some(opcion => opcion.value === personas)) {
-    document.getElementById("cantidad").value = personas;
-  }
-}
-
-// Animaciones al desplazarse por la página
-const observador = new IntersectionObserver(entradas => {
-  entradas.forEach(entrada => {
-    if (entrada.isIntersecting) {
-      entrada.target.classList.add("visible");
-      observador.unobserve(entrada.target);
+      document.getElementById('countdownMessage').textContent = '';
     }
-  });
-}, { threshold: 0.12 });
 
-document.querySelectorAll(".revelar").forEach(elemento => {
-  observador.observe(elemento);
-});
-</script>
+    actualizarCuenta();
+    window.setInterval(actualizarCuenta, 1000);
 
+    // CONFIRMACIÓN DE ASISTENCIA POR WHATSAPP
+    document.getElementById('rsvpForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const nombre = nombreInput.value.trim();
+      const personas = personasSelect.value;
+
+      if (!nombre) {
+        nombreInput.focus();
+        return;
+      }
+
+      const mensaje =
+        '¡Hola! Confirmo mi asistencia a la boda de María y Ricardo.%0A' +
+        'Nombre: ' + nombre + '%0A' +
+        'Número total de personas: ' + personas + '%0A' +
+        'Fecha: 27 de diciembre de 2026.';
+
+      const url =
+        'https://wa.me/525638830474?text=' +
+        encodeURIComponent(
+          '¡Hola! Confirmo mi asistencia a la boda de María y Ricardo.\n' +
+          'Nombre: ' + nombre + '\n' +
+          'Número total de personas: ' + personas + '\n' +
+          'Fecha: 27 de diciembre de 2026.'
+        );
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+
+    // ANIMACIÓN DE APARICIÓN AL DESPLAZARSE
+    const elementos = document.querySelectorAll('.reveal');
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      elementos.forEach(elemento => observer.observe(elemento));
+    } else {
+      elementos.forEach(elemento => elemento.classList.add('in-view'));
+    }
+  </script>
 </body>
 </html>
