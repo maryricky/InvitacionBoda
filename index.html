@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#641c2b">
+<meta name="description" content="Invitación a la boda de María y Ricardo, el 27 de diciembre de 2026.">
 <title>María & Ricardo | Nuestra boda</title>
 
 <style>
@@ -102,6 +103,7 @@ button, input, select { font: inherit; }
   background: #ecd49b;
 }
 .boton-redondo { border-radius: 40px; }
+
 .particula {
   position: absolute;
   width: 5px;
@@ -148,11 +150,12 @@ button, input, select { font: inherit; }
   margin: 25px auto;
   line-height: 1.9;
 }
+
 .seccion {
   padding: 85px 22px;
   text-align: center;
 }
-.seccion h2 {
+.seccion h2, .vestimenta h2, .hoteles h2 {
   font-size: clamp(2rem, 5vw, 3.2rem);
   font-weight: normal;
   color: var(--vino);
@@ -169,6 +172,7 @@ button, input, select { font: inherit; }
   margin: 15px auto;
   line-height: 1.9;
 }
+
 .cuenta {
   display: flex;
   justify-content: center;
@@ -193,6 +197,7 @@ button, input, select { font: inherit; }
   text-transform: uppercase;
   letter-spacing: .12em;
 }
+
 .detalles { background: #f2e8dc; }
 .tarjeta {
   max-width: 700px;
@@ -206,12 +211,106 @@ button, input, select { font: inherit; }
   font-weight: normal;
   color: var(--vino);
 }
+
 .regalos {
   background: linear-gradient(135deg, #4a1421, #6d2537);
   color: var(--crema);
 }
 .regalos h2 { color: #f3dca5; }
 .regalos .subtitulo { color: #e7c985; }
+
+/* Código de vestimenta */
+.vestimenta {
+  background: #fff8ef;
+  padding: 85px 22px;
+  text-align: center;
+}
+.vestimenta-contenido {
+  max-width: 700px;
+  margin: 30px auto 0;
+  padding: 35px 22px;
+  border: 1px solid var(--dorado);
+  background: #fffdf8;
+}
+.icono-vestimenta {
+  font-size: 48px;
+  color: #b08a46;
+  margin-bottom: 15px;
+}
+.colores-prohibidos {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+}
+.color-prohibido {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font: 13px Arial, sans-serif;
+}
+.muestra-color {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  border: 1px solid #c7b9ad;
+}
+.color-vino { background: #641c2b; }
+.color-blanco { background: #fff; }
+
+/* Hoteles */
+.hoteles {
+  background: #f2e8dc;
+  padding: 85px 22px;
+  text-align: center;
+}
+.lista-hoteles {
+  max-width: 1000px;
+  margin: 35px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  text-align: left;
+}
+.hotel-card {
+  background: #fffdf8;
+  border: 1px solid var(--dorado);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.hotel-card h3 {
+  color: var(--vino);
+  font-size: 1.3rem;
+  font-weight: normal;
+  margin: 0 0 12px;
+}
+.hotel-card p {
+  font-size: 14px;
+  margin: 0 0 18px;
+  line-height: 1.8;
+}
+.hotel-card a {
+  margin-top: auto;
+  display: inline-block;
+  padding: 11px 15px;
+  background: var(--vino);
+  color: var(--crema);
+  text-decoration: none;
+  font: 12px Arial, sans-serif;
+  letter-spacing: .04em;
+}
+.hotel-card a:hover { background: #8a3548; }
+.nota-hoteles {
+  max-width: 700px;
+  margin: 25px auto 0;
+  font-size: 13px;
+  color: #6e5550;
+}
+
+/* Confirmación */
 .confirmacion { background: #fffaf3; }
 .formulario {
   max-width: 500px;
@@ -233,7 +332,11 @@ button, input, select { font: inherit; }
   color: var(--texto);
   font: 16px Arial, sans-serif;
 }
-.formulario button { width: 100%; margin-top: 20px; }
+.formulario button {
+  width: 100%;
+  margin-top: 20px;
+}
+
 .musica {
   position: fixed;
   z-index: 5;
@@ -264,16 +367,11 @@ footer {
   opacity: 1;
   transform: none;
 }
-@keyframes flotar {
-  50% { transform: translate(18px, -15px) scale(1.03); }
-}
-@keyframes aparecer {
-  from { opacity: 0; transform: translateY(25px); }
-  to { opacity: 1; transform: none; }
-}
-@keyframes brillo {
-  0%,100% { transform: scale(.5); opacity: .25; }
-  50% { transform: scale(1.8); opacity: 1; }
+
+@media (max-width: 480px) {
+  .seccion, .vestimenta, .hoteles { padding: 65px 17px; }
+  .unidad { min-width: 68px; padding: 15px 8px; }
+  .unidad strong { font-size: 1.7rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
@@ -287,6 +385,7 @@ footer {
 
 <body>
 
+<!-- PORTADA ANIMADA -->
 <div class="portada" id="portada">
   <span class="particula"></span>
   <span class="particula"></span>
@@ -298,15 +397,21 @@ footer {
     <h1>María <span class="amp">&</span><br>Ricardo</h1>
     <div class="adorno">✧ ❦ ✧</div>
     <p>Tenemos algo especial que compartir contigo</p>
-    <button class="boton boton-redondo" id="abrir">Abrir invitación ✨</button>
+    <button class="boton boton-redondo" id="abrir">
+      Abrir invitación ✨
+    </button>
   </div>
 </div>
 
-<!-- Musica.mpeg debe estar en la MISMA carpeta que index.html -->
+<!-- Musica.mpeg debe estar junto a index.html -->
 <audio id="musica" src="Musica.mpeg" preload="auto" loop></audio>
-<button class="musica" id="controlMusica" aria-label="Pausar música" title="Pausar o reproducir música" hidden>Ⅱ</button>
+
+<button class="musica" id="controlMusica"
+        aria-label="Pausar música"
+        title="Pausar o reproducir música" hidden>Ⅱ</button>
 
 <main>
+  <!-- PRESENTACIÓN -->
   <header class="hero">
     <div class="hero-contenido">
       <div class="leyenda">¡Nos casamos!</div>
@@ -321,32 +426,41 @@ footer {
     </div>
   </header>
 
+  <!-- CUENTA REGRESIVA -->
   <section class="seccion revelar">
     <div class="subtitulo">Cuenta regresiva</div>
     <h2>Falta poco para nuestro gran día</h2>
+
     <div class="cuenta" aria-live="polite">
       <div class="unidad"><strong id="dias">—</strong><span>Días</span></div>
       <div class="unidad"><strong id="horas">—</strong><span>Horas</span></div>
       <div class="unidad"><strong id="minutos">—</strong><span>Minutos</span></div>
       <div class="unidad"><strong id="segundos">—</strong><span>Segundos</span></div>
     </div>
+
     <p id="mensajeCuenta">Cada día nos acerca a una fecha muy especial.</p>
   </section>
 
+  <!-- UBICACIÓN -->
   <section class="seccion detalles revelar">
     <div class="subtitulo">Nos encantará verte</div>
     <h2>Detalles del evento</h2>
+
     <div class="tarjeta">
       <div class="adorno">✧</div>
       <h3>La celebración</h3>
       <p><strong>Domingo, 27 de diciembre de 2026</strong></p>
       <p>3:00 p. m.</p>
       <p>Consulta la ubicación exacta en el mapa para planear tu llegada.</p>
-      <a class="boton" href="https://maps.app.goo.gl/1yM4By1HhzDegsDDA?g_st=aw"
-         target="_blank" rel="noopener noreferrer">Ver ubicación en Google Maps</a>
+      <a class="boton"
+         href="https://maps.app.goo.gl/1yM4By1HhzDegsDDA?g_st=aw"
+         target="_blank" rel="noopener noreferrer">
+        Ver ubicación en Google Maps
+      </a>
     </div>
   </section>
 
+  <!-- MESA DE REGALOS -->
   <section class="seccion regalos revelar">
     <div class="subtitulo">Con cariño</div>
     <h2>Mesa de regalos</h2>
@@ -359,10 +473,146 @@ footer {
     </p>
   </section>
 
+  <!-- CÓDIGO DE VESTIMENTA -->
+  <section class="vestimenta revelar">
+    <div class="subtitulo">Una ocasión especial</div>
+    <h2>Código de vestimenta</h2>
+
+    <div class="vestimenta-contenido">
+      <div class="icono-vestimenta">♔</div>
+      <h3 style="color:#641c2b;font-weight:normal;font-size:1.6rem;">
+        Formal
+      </h3>
+
+      <p>
+        Nos encantará compartir este día tan especial contigo.
+        Te invitamos a vestir de manera formal y elegante para
+        celebrar juntos este momento inolvidable.
+      </p>
+
+      <p><strong>Por favor, evita los siguientes colores:</strong></p>
+
+      <div class="colores-prohibidos">
+        <div class="color-prohibido">
+          <span class="muestra-color color-vino"></span>
+          <strong>Vino</strong>
+        </div>
+
+        <div class="color-prohibido">
+          <span class="muestra-color color-blanco"></span>
+          <strong>Blanco</strong>
+        </div>
+      </div>
+
+      <p>
+        El color vino y el blanco estarán reservados para la novia.
+        ¡Gracias por ayudarnos a hacer de este día una celebración
+        hermosa e inolvidable!
+      </p>
+    </div>
+  </section>
+
+  <!-- HOTELES CERCANOS -->
+  <section class="hoteles revelar">
+    <div class="subtitulo">Para tu comodidad</div>
+    <h2>Hoteles cercanos</h2>
+
+    <p>
+      Si vienes de fuera, consulta estas búsquedas de hospedaje
+      en San Mateo Atenco y sus alrededores.
+    </p>
+
+    <div class="lista-hoteles">
+
+      <article class="hotel-card">
+        <h3>Hoteles en San Mateo Atenco</h3>
+        <p>
+          Consulta establecimientos en el municipio y compara
+          distancias con el lugar de la celebración.
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+San+Mateo+Atenco"
+           target="_blank" rel="noopener noreferrer">
+          VER HOTELES
+        </a>
+      </article>
+
+      <article class="hotel-card">
+        <h3>Hoteles en Paseo Tollocan</h3>
+        <p>
+          Busca opciones de hospedaje sobre esta vía y en la
+          zona cercana a San Mateo Atenco.
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+Paseo+Tollocan+Toluca"
+           target="_blank" rel="noopener noreferrer">
+          VER HOTELES
+        </a>
+      </article>
+
+      <article class="hotel-card">
+        <h3>Hoteles cerca del aeropuerto de Toluca</h3>
+        <p>
+          Una alternativa para quienes llegan de otras ciudades
+          y prefieren alojarse cerca del aeropuerto.
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+cerca+del+Aeropuerto+de+Toluca"
+           target="_blank" rel="noopener noreferrer">
+          VER HOTELES
+        </a>
+      </article>
+
+      <article class="hotel-card">
+        <h3>Hoteles en Metepec</h3>
+        <p>
+          Explora alojamientos en el municipio vecino y revisa
+          cuál resulta más conveniente para tu traslado.
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+Metepec+Estado+de+Mexico"
+           target="_blank" rel="noopener noreferrer">
+          VER HOTELES
+        </a>
+      </article>
+
+      <article class="hotel-card">
+        <h3>Hoteles en Toluca</h3>
+        <p>
+          Revisa hoteles en Toluca para comparar tarifas,
+          servicios y disponibilidad.
+        </p>
+        <a href="https://www.google.com/maps/search/?api=1&query=hoteles+Toluca+Estado+de+Mexico"
+           target="_blank" rel="noopener noreferrer">
+          VER HOTELES
+        </a>
+      </article>
+
+      <article class="hotel-card">
+        <h3>Más opciones de hospedaje</h3>
+        <p>
+          Abre el mapa para explorar alojamientos, revisar
+          opiniones y consultar cómo llegar.
+        </p>
+        <a href="https://www.google.com/maps/search/hoteles+cerca+de+San+Mateo+Atenco/"
+           target="_blank" rel="noopener noreferrer">
+          EXPLORAR MAPA
+        </a>
+      </article>
+
+    </div>
+
+    <p class="nota-hoteles">
+      Los enlaces abren búsquedas en Google Maps; no representan
+      reservaciones confirmadas. Verifica directamente la dirección,
+      disponibilidad, tarifas y distancia antes de reservar.
+    </p>
+  </section>
+
+  <!-- CONFIRMACIÓN POR WHATSAPP -->
   <section class="seccion confirmacion revelar" id="confirmar">
     <div class="subtitulo">Por favor, confirma tu asistencia</div>
     <h2>¿Nos acompañas?</h2>
-    <p>Completa tus datos y se abrirá WhatsApp con la confirmación lista para enviar.</p>
+    <p>
+      Completa tus datos y se abrirá WhatsApp con la confirmación
+      lista para enviar.
+    </p>
 
     <form class="formulario" id="formulario">
       <label for="nombreInvitado">Nombre de quien confirma</label>
@@ -429,6 +679,7 @@ controlMusica.addEventListener("click", async () => {
   }
 });
 
+// Cuenta regresiva: 27 de diciembre de 2026 a las 3:00 p. m. (UTC-6)
 const fechaBoda = new Date("2026-12-27T15:00:00-06:00").getTime();
 
 function actualizarCuenta() {
@@ -456,6 +707,7 @@ function actualizarCuenta() {
 actualizarCuenta();
 setInterval(actualizarCuenta, 1000);
 
+// Confirmación de asistencia por WhatsApp
 document.getElementById("formulario").addEventListener("submit", event => {
   event.preventDefault();
 
@@ -474,19 +726,25 @@ document.getElementById("formulario").addEventListener("submit", event => {
   window.open(url, "_blank", "noopener,noreferrer");
 });
 
-// Opcional: precargar datos con ?invitado=Ana%20Pérez&personas=2
+// Opcional: precargar datos con
+// ?invitado=Ana%20Pérez&personas=2
 const parametros = new URLSearchParams(window.location.search);
+
 if (parametros.has("invitado")) {
-  document.getElementById("nombreInvitado").value = parametros.get("invitado");
+  document.getElementById("nombreInvitado").value =
+    parametros.get("invitado");
 }
+
 if (parametros.has("personas")) {
   const personas = parametros.get("personas");
   const opciones = [...document.getElementById("cantidad").options];
+
   if (opciones.some(opcion => opcion.value === personas)) {
     document.getElementById("cantidad").value = personas;
   }
 }
 
+// Animaciones al desplazarse por la página
 const observador = new IntersectionObserver(entradas => {
   entradas.forEach(entrada => {
     if (entrada.isIntersecting) {
@@ -500,5 +758,6 @@ document.querySelectorAll(".revelar").forEach(elemento => {
   observador.observe(elemento);
 });
 </script>
+
 </body>
 </html>
