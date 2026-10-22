@@ -1,0 +1,504 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#641c2b">
+<title>María & Ricardo | Nuestra boda</title>
+
+<style>
+:root {
+  --vino: #641c2b;
+  --vino-oscuro: #35101c;
+  --dorado: #d8b56d;
+  --crema: #fff8ef;
+  --texto: #40252b;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--crema);
+  color: var(--texto);
+  font-family: Georgia, "Times New Roman", serif;
+}
+button, input, select { font: inherit; }
+
+.portada {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  text-align: center;
+  color: var(--crema);
+  background:
+    radial-gradient(circle at 20% 20%, #8e3549, transparent 35%),
+    radial-gradient(circle at 80% 80%, #8e3549, transparent 35%),
+    linear-gradient(135deg, var(--vino-oscuro), var(--vino));
+  transition: opacity 1s, visibility 1s;
+}
+.portada.cerrada {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.portada::before, .portada::after {
+  content: "";
+  position: absolute;
+  width: 65vmin;
+  height: 65vmin;
+  border: 1px solid #d8b56d66;
+  border-radius: 50%;
+  animation: flotar 9s ease-in-out infinite;
+}
+.portada::after {
+  width: 90vmin;
+  height: 90vmin;
+  animation-delay: -4s;
+}
+.portada-contenido {
+  position: relative;
+  z-index: 1;
+  padding: 25px;
+  animation: aparecer 1.2s ease both;
+}
+.leyenda {
+  color: var(--dorado);
+  font: 12px Arial, sans-serif;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+}
+.portada h1, .hero h1 {
+  font-weight: normal;
+  line-height: 1.05;
+  font-size: clamp(3rem, 9vw, 6rem);
+  margin: 25px 0;
+}
+.amp {
+  color: var(--dorado);
+  font-style: italic;
+}
+.adorno {
+  color: var(--dorado);
+  font-size: 28px;
+  letter-spacing: .2em;
+  margin: 20px;
+}
+.boton {
+  display: inline-block;
+  padding: 14px 25px;
+  color: var(--vino-oscuro);
+  background: var(--dorado);
+  border: 1px solid var(--dorado);
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .2s, background .2s;
+}
+.boton:hover {
+  transform: translateY(-2px);
+  background: #ecd49b;
+}
+.boton-redondo { border-radius: 40px; }
+.particula {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--dorado);
+  border-radius: 50%;
+  animation: brillo 4s infinite;
+}
+.particula:nth-child(1) { left: 13%; top: 18%; }
+.particula:nth-child(2) { left: 80%; top: 25%; animation-delay: 1s; }
+.particula:nth-child(3) { left: 23%; top: 78%; animation-delay: 2s; }
+.particula:nth-child(4) { left: 88%; top: 73%; animation-delay: .7s; }
+
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 90px 22px;
+  text-align: center;
+  color: var(--crema);
+  background:
+    linear-gradient(#260a13a8, #260a13a8),
+    radial-gradient(ellipse at center, #8b3448, #35101c);
+  position: relative;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid #d8b56d99;
+  pointer-events: none;
+}
+.hero-contenido { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(3.2rem, 10vw, 7rem); }
+.fecha {
+  color: var(--dorado);
+  font: 13px Arial, sans-serif;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.intro {
+  max-width: 600px;
+  margin: 25px auto;
+  line-height: 1.9;
+}
+.seccion {
+  padding: 85px 22px;
+  text-align: center;
+}
+.seccion h2 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: normal;
+  color: var(--vino);
+  margin: 15px 0;
+}
+.subtitulo {
+  color: #916a3c;
+  font: 12px Arial, sans-serif;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.seccion p {
+  max-width: 700px;
+  margin: 15px auto;
+  line-height: 1.9;
+}
+.cuenta {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 35px auto;
+}
+.unidad {
+  min-width: 80px;
+  padding: 20px 12px;
+  border: 1px solid var(--dorado);
+  background: #fffdf8;
+}
+.unidad strong {
+  display: block;
+  font-size: 2rem;
+  font-weight: normal;
+  color: var(--vino);
+}
+.unidad span {
+  font: 10px Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+}
+.detalles { background: #f2e8dc; }
+.tarjeta {
+  max-width: 700px;
+  margin: 30px auto 0;
+  padding: 30px 20px;
+  border: 1px solid var(--dorado);
+  background: #fffaf3;
+}
+.tarjeta h3 {
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: var(--vino);
+}
+.regalos {
+  background: linear-gradient(135deg, #4a1421, #6d2537);
+  color: var(--crema);
+}
+.regalos h2 { color: #f3dca5; }
+.regalos .subtitulo { color: #e7c985; }
+.confirmacion { background: #fffaf3; }
+.formulario {
+  max-width: 500px;
+  margin: 25px auto;
+  text-align: left;
+}
+.formulario label {
+  display: block;
+  margin: 16px 0 7px;
+  font: 12px Arial, sans-serif;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.formulario input, .formulario select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #cdbda9;
+  background: white;
+  color: var(--texto);
+  font: 16px Arial, sans-serif;
+}
+.formulario button { width: 100%; margin-top: 20px; }
+.musica {
+  position: fixed;
+  z-index: 5;
+  right: 18px;
+  bottom: 18px;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--dorado);
+  border-radius: 50%;
+  background: var(--vino);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 18px #0002;
+}
+footer {
+  padding: 30px 15px;
+  text-align: center;
+  background: var(--vino-oscuro);
+  color: #e9d8c5;
+  line-height: 1.8;
+}
+.revelar {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity .8s, transform .8s;
+}
+.revelar.visible {
+  opacity: 1;
+  transform: none;
+}
+@keyframes flotar {
+  50% { transform: translate(18px, -15px) scale(1.03); }
+}
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes brillo {
+  0%,100% { transform: scale(.5); opacity: .25; }
+  50% { transform: scale(1.8); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="portada" id="portada">
+  <span class="particula"></span>
+  <span class="particula"></span>
+  <span class="particula"></span>
+  <span class="particula"></span>
+
+  <div class="portada-contenido">
+    <div class="leyenda">Una celebración de amor</div>
+    <h1>María <span class="amp">&</span><br>Ricardo</h1>
+    <div class="adorno">✧ ❦ ✧</div>
+    <p>Tenemos algo especial que compartir contigo</p>
+    <button class="boton boton-redondo" id="abrir">Abrir invitación ✨</button>
+  </div>
+</div>
+
+<!-- Musica.mpeg debe estar en la MISMA carpeta que index.html -->
+<audio id="musica" src="Musica.mpeg" preload="auto" loop></audio>
+<button class="musica" id="controlMusica" aria-label="Pausar música" title="Pausar o reproducir música" hidden>Ⅱ</button>
+
+<main>
+  <header class="hero">
+    <div class="hero-contenido">
+      <div class="leyenda">¡Nos casamos!</div>
+      <h1>María <span class="amp">&</span><br>Ricardo</h1>
+      <div class="adorno">✧ ❦ ✧</div>
+      <p class="intro">
+        Hay momentos que se vuelven inolvidables cuando los compartimos
+        con las personas que queremos. Nos encantaría que nos acompañaras
+        en el comienzo de nuestra historia juntos.
+      </p>
+      <p class="fecha">27 · Diciembre · 2026 &nbsp; | &nbsp; 3:00 p. m.</p>
+    </div>
+  </header>
+
+  <section class="seccion revelar">
+    <div class="subtitulo">Cuenta regresiva</div>
+    <h2>Falta poco para nuestro gran día</h2>
+    <div class="cuenta" aria-live="polite">
+      <div class="unidad"><strong id="dias">—</strong><span>Días</span></div>
+      <div class="unidad"><strong id="horas">—</strong><span>Horas</span></div>
+      <div class="unidad"><strong id="minutos">—</strong><span>Minutos</span></div>
+      <div class="unidad"><strong id="segundos">—</strong><span>Segundos</span></div>
+    </div>
+    <p id="mensajeCuenta">Cada día nos acerca a una fecha muy especial.</p>
+  </section>
+
+  <section class="seccion detalles revelar">
+    <div class="subtitulo">Nos encantará verte</div>
+    <h2>Detalles del evento</h2>
+    <div class="tarjeta">
+      <div class="adorno">✧</div>
+      <h3>La celebración</h3>
+      <p><strong>Domingo, 27 de diciembre de 2026</strong></p>
+      <p>3:00 p. m.</p>
+      <p>Consulta la ubicación exacta en el mapa para planear tu llegada.</p>
+      <a class="boton" href="https://maps.app.goo.gl/1yM4By1HhzDegsDDA?g_st=aw"
+         target="_blank" rel="noopener noreferrer">Ver ubicación en Google Maps</a>
+    </div>
+  </section>
+
+  <section class="seccion regalos revelar">
+    <div class="subtitulo">Con cariño</div>
+    <h2>Mesa de regalos</h2>
+    <div class="adorno">✧ ❦ ✧</div>
+    <p>
+      El mejor regalo es compartir este día con ustedes. Si desean obsequiarnos
+      algo, una lluvia de sobres será nuestra manera favorita de recibir sus
+      buenos deseos y apoyo para comenzar esta nueva etapa juntos. Gracias por
+      ser parte de nuestra historia de amor.
+    </p>
+  </section>
+
+  <section class="seccion confirmacion revelar" id="confirmar">
+    <div class="subtitulo">Por favor, confirma tu asistencia</div>
+    <h2>¿Nos acompañas?</h2>
+    <p>Completa tus datos y se abrirá WhatsApp con la confirmación lista para enviar.</p>
+
+    <form class="formulario" id="formulario">
+      <label for="nombreInvitado">Nombre de quien confirma</label>
+      <input id="nombreInvitado" type="text" maxlength="100"
+             placeholder="Escribe tu nombre" required>
+
+      <label for="cantidad">Número total de personas que asistirán</label>
+      <select id="cantidad" required>
+        <option value="1">1 persona</option>
+        <option value="2">2 personas</option>
+        <option value="3">3 personas</option>
+        <option value="4">4 personas</option>
+        <option value="5">5 personas</option>
+        <option value="6">6 personas</option>
+        <option value="7">7 personas</option>
+        <option value="8">8 personas</option>
+        <option value="9">9 personas</option>
+        <option value="10">10 personas</option>
+      </select>
+
+      <button class="boton" type="submit">Confirmar por WhatsApp</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  Con todo nuestro cariño,<br>
+  <strong>María & Ricardo</strong><br>
+  27 de diciembre de 2026
+</footer>
+
+<script>
+const portada = document.getElementById("portada");
+const musica = document.getElementById("musica");
+const controlMusica = document.getElementById("controlMusica");
+
+document.getElementById("abrir").addEventListener("click", async () => {
+  portada.classList.add("cerrada");
+  controlMusica.hidden = false;
+
+  try {
+    await musica.play();
+    controlMusica.textContent = "Ⅱ";
+    controlMusica.setAttribute("aria-label", "Pausar música");
+  } catch (error) {
+    controlMusica.textContent = "▶";
+    controlMusica.setAttribute("aria-label", "Reproducir música");
+  }
+});
+
+controlMusica.addEventListener("click", async () => {
+  if (musica.paused) {
+    try {
+      await musica.play();
+      controlMusica.textContent = "Ⅱ";
+      controlMusica.setAttribute("aria-label", "Pausar música");
+    } catch (error) {
+      alert("No se pudo reproducir la música. Verifica que Musica.mpeg esté junto a index.html.");
+    }
+  } else {
+    musica.pause();
+    controlMusica.textContent = "▶";
+    controlMusica.setAttribute("aria-label", "Reproducir música");
+  }
+});
+
+const fechaBoda = new Date("2026-12-27T15:00:00-06:00").getTime();
+
+function actualizarCuenta() {
+  const diferencia = fechaBoda - Date.now();
+
+  if (diferencia <= 0) {
+    ["dias", "horas", "minutos", "segundos"].forEach(id => {
+      document.getElementById(id).textContent = "0";
+    });
+    document.getElementById("mensajeCuenta").textContent =
+      "¡Hoy celebramos nuestro amor! Gracias por acompañarnos.";
+    return;
+  }
+
+  document.getElementById("dias").textContent =
+    Math.floor(diferencia / 86400000);
+  document.getElementById("horas").textContent =
+    Math.floor((diferencia % 86400000) / 3600000);
+  document.getElementById("minutos").textContent =
+    Math.floor((diferencia % 3600000) / 60000);
+  document.getElementById("segundos").textContent =
+    Math.floor((diferencia % 60000) / 1000);
+}
+
+actualizarCuenta();
+setInterval(actualizarCuenta, 1000);
+
+document.getElementById("formulario").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const nombre = document.getElementById("nombreInvitado").value.trim();
+  const cantidad = document.getElementById("cantidad").value;
+  if (!nombre) return;
+
+  const mensaje =
+    `¡Hola! Confirmo mi asistencia a la boda de María y Ricardo.\n\n` +
+    `Nombre: ${nombre}\n` +
+    `Total de personas que asistirán: ${cantidad}.`;
+
+  const url = "https://wa.me/525638830474?text=" +
+    encodeURIComponent(mensaje);
+
+  window.open(url, "_blank", "noopener,noreferrer");
+});
+
+// Opcional: precargar datos con ?invitado=Ana%20Pérez&personas=2
+const parametros = new URLSearchParams(window.location.search);
+if (parametros.has("invitado")) {
+  document.getElementById("nombreInvitado").value = parametros.get("invitado");
+}
+if (parametros.has("personas")) {
+  const personas = parametros.get("personas");
+  const opciones = [...document.getElementById("cantidad").options];
+  if (opciones.some(opcion => opcion.value === personas)) {
+    document.getElementById("cantidad").value = personas;
+  }
+}
+
+const observador = new IntersectionObserver(entradas => {
+  entradas.forEach(entrada => {
+    if (entrada.isIntersecting) {
+      entrada.target.classList.add("visible");
+      observador.unobserve(entrada.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".revelar").forEach(elemento => {
+  observador.observe(elemento);
+});
+</script>
+</body>
+</html>
