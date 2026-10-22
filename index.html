@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#650d25">
   <meta name="description" content="María y Ricardo te invitan a celebrar su amor el 27 de diciembre de 2026.">
-  <title>María & Ricardo | Nuestra boda</title>
+  <title>María & Ricardo | Nuestra celebración</title>
 
   <style>
     :root {
@@ -39,16 +39,8 @@
       font: inherit;
     }
 
-    button, a {
-      -webkit-tap-highlight-color: transparent;
-    }
-
     a {
       color: inherit;
-    }
-
-    .oculto {
-      display: none !important;
     }
 
     .seccion {
@@ -69,10 +61,6 @@
       margin-bottom: 12px;
     }
 
-    h1, h2, h3, p {
-      overflow-wrap: break-word;
-    }
-
     h2 {
       color: var(--vino);
       font-size: clamp(27px, 5vw, 40px);
@@ -87,7 +75,7 @@
     }
 
     .texto-dorado {
-      color: var(--dorado);
+      color: var(--dorado-claro);
     }
 
     .boton {
@@ -107,24 +95,15 @@
       transform: translateY(-2px);
     }
 
-    .boton-secundario {
-      background: transparent;
-      color: var(--vino);
-    }
-
-    .boton-secundario:hover {
-      color: white;
-    }
-
     .tarjeta {
       padding: 28px;
       border: 1px solid var(--dorado-claro);
       border-radius: 16px;
-      background: rgba(255,255,255,0.72);
+      background: rgba(255,255,255,0.85);
       box-shadow: 0 8px 25px rgba(62,7,22,0.05);
     }
 
-    /* SOBRE DE INVITACIÓN */
+    /* PORTADA Y SOBRE */
 
     #portada {
       position: fixed;
@@ -293,7 +272,7 @@
       letter-spacing: 1px;
     }
 
-    /* DETALLES DEL EVENTO */
+    /* CELEBRACIÓN */
 
     .aviso-celebracion {
       margin: 28px auto 0;
@@ -333,7 +312,7 @@
       font-size: 18px;
     }
 
-    /* FOTO PRINCIPAL */
+    /* FOTOGRAFÍA */
 
     .foto-principal {
       background: #f3e8df;
@@ -351,13 +330,11 @@
       box-shadow: 0 12px 35px rgba(62,7,22,0.12);
     }
 
-    /* UBICACIÓN */
-
     .ubicacion {
       background: white;
     }
 
-    /* CÓDIGO QR */
+    /* QR PARA FOTOGRAFÍAS */
 
     .fotos-boda {
       background: #f7efe6;
@@ -402,34 +379,29 @@
       background: var(--crema);
     }
 
-    /* VESTIMENTA */
+    /* VESTIMENTA: SOLO BLANCO Y VINO */
 
     .vestimenta {
       background: #f3e8df;
     }
 
-    .colores-vestimenta {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 18px;
-      margin: 24px 0;
+    .aviso-colores {
+      margin-top: 20px;
+      padding: 24px;
+      background: white;
+      border: 1px solid var(--dorado-claro);
+      border-radius: 12px;
     }
 
-    .color-vestimenta {
-      width: 85px;
-      font-size: 12px;
+    .aviso-colores p {
+      margin: 8px 0;
     }
 
-    .muestra-color {
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      margin: 0 auto 8px;
-      border: 1px solid #d4c4b3;
+    .aviso-colores strong {
+      color: var(--vino);
     }
 
-    /* HOTELES */
+    /* HOSPEDAJE */
 
     .lista-hoteles {
       display: grid;
@@ -494,8 +466,6 @@
       color: #77686a;
     }
 
-    /* PIE DE PÁGINA */
-
     footer {
       padding: 38px 20px;
       background: var(--vino-oscuro);
@@ -555,25 +525,24 @@
 
 <body>
 
-  <!--
-    CONFIGURACIÓN:
-    1. Coloca fotoboda.jpeg, Musica.mpeg y qrboda.png junto a este archivo.
-    2. Cambia PHOTO_UPLOAD_URL por el enlace real del álbum donde subirán fotos.
-    3. El QR qrboda.png también debe apuntar a ese álbum o servicio de carga.
-  -->
+  <!-- PORTADA DE LA INVITACIÓN -->
 
   <section id="portada" aria-label="Abrir invitación">
     <div class="portada-contenido">
       <div class="marco-portada">
         <div class="sobrelinea">Tenemos el honor de invitarte</div>
         <div class="iniciales">M <span class="ampersand">&</span> R</div>
+
         <div class="nombre-invitado" id="nombrePortada">
           Queridos familiares y amigos
         </div>
+
         <p>Nos encantaría compartir este día contigo.</p>
         <div class="sobre-icono" aria-hidden="true">✉</div>
         <div class="hero-fecha">27 · DICIEMBRE · 2026</div>
+
         <br>
+
         <button class="boton" id="abrirInvitacion" type="button">
           Abrir invitación
         </button>
@@ -590,17 +559,23 @@
     aria-label="Reproducir o pausar música"
   >♫ Activar música</button>
 
+  <!-- ENCABEZADO -->
+
   <header>
     <div class="hero-contenido">
       <div class="hero-etiqueta">¡Nos casamos!</div>
+
       <h1>
         María <span class="ampersand">&</span><br>Ricardo
       </h1>
+
       <p class="hero-frase">
         El amor se celebra mejor cuando se comparte con las personas
         que forman parte de nuestra historia.
       </p>
+
       <p id="saludoInvitado" class="texto-dorado"></p>
+
       <div class="hero-fecha">27 DE DICIEMBRE DE 2026 · 3:00 P. M.</div>
     </div>
   </header>
@@ -613,6 +588,7 @@
       <div class="contenido">
         <div class="sobrelinea">Un día para recordar</div>
         <h2>¡Queremos celebrar contigo!</h2>
+
         <p>
           Hay momentos que se vuelven inolvidables gracias a las personas
           con quienes los compartimos. Nos haría muy felices contar con
@@ -621,15 +597,18 @@
 
         <div class="aviso-celebracion">
           <h3>Una celebración llena de amor</h3>
+
           <p>
             Queremos reunirnos con nuestros familiares y amigos para
             celebrar el comienzo de esta nueva etapa.
           </p>
+
           <p>
             <strong>Importante:</strong> el 27 de diciembre habrá
             únicamente celebración. No se realizará ceremonia durante
             el evento.
           </p>
+
           <p>¡Gracias por acompañarnos en este día tan especial!</p>
         </div>
       </div>
@@ -648,19 +627,23 @@
             <span class="contador-numero" id="dias">--</span>
             <span class="contador-etiqueta">Días</span>
           </div>
+
           <div class="contador-item">
             <span class="contador-numero" id="horas">--</span>
             <span class="contador-etiqueta">Horas</span>
           </div>
+
           <div class="contador-item">
             <span class="contador-numero" id="minutos">--</span>
             <span class="contador-etiqueta">Minutos</span>
           </div>
+
           <div class="contador-item">
             <span class="contador-numero" id="segundos">--</span>
             <span class="contador-etiqueta">Segundos</span>
           </div>
         </div>
+
         <p id="mensajeContador" aria-live="polite"></p>
       </div>
     </section>
@@ -671,9 +654,11 @@
       <div class="contenido">
         <div class="sobrelinea">Nuestra historia</div>
         <h2>Un nuevo capítulo comienza</h2>
+
         <p>
           Queremos compartir con ustedes la alegría de esta nueva etapa.
         </p>
+
         <img
           src="fotoboda.jpeg"
           alt="Fotografía de María y Ricardo"
@@ -706,7 +691,7 @@
           <div class="dato">
             <div class="dato-icono" aria-hidden="true">✧</div>
             <strong>Evento</strong>
-            <span>Celebración</span>
+            <span>Celebración, sin ceremonia ese día</span>
           </div>
 
           <div class="dato">
@@ -724,9 +709,11 @@
       <div class="contenido">
         <div class="sobrelinea">Cómo llegar</div>
         <h2>Te esperamos</h2>
+
         <p>
           Consulta la ubicación de la celebración y planea tu recorrido.
         </p>
+
         <a
           class="boton"
           href="https://maps.app.goo.gl/1yM4By1HhzDegsDDA?g_st=aw"
@@ -744,6 +731,7 @@
       <div class="contenido">
         <div class="sobrelinea">Nuestros recuerdos</div>
         <h2>¡Comparte tus fotografías!</h2>
+
         <p>
           Nos encantará conservar los momentos que compartamos con ustedes.
           Si tomas fotografías durante la celebración, ayúdanos a reunir
@@ -801,40 +789,30 @@
       </div>
     </section>
 
-    <!-- VESTIMENTA -->
+    <!-- CÓDIGO DE VESTIMENTA -->
 
     <section class="seccion vestimenta">
       <div class="contenido">
         <div class="sobrelinea">Código de vestimenta</div>
         <h2>Formal</h2>
+
         <p>
           Nos encantará verlos elegantes para esta ocasión especial.
         </p>
 
-        <div class="tarjeta">
+        <div class="aviso-colores">
           <p>
-            Les pedimos amablemente evitar el color blanco, reservado para
-            la novia, así como los tonos vino o borgoña.
+            Les pedimos amablemente evitar el color <strong>blanco</strong>,
+            reservado para la novia.
           </p>
 
-          <div class="colores-vestimenta">
-            <div class="color-vestimenta">
-              <div class="muestra-color" style="background:#20252d"></div>
-              Negro
-            </div>
-            <div class="color-vestimenta">
-              <div class="muestra-color" style="background:#243c50"></div>
-              Azul marino
-            </div>
-            <div class="color-vestimenta">
-              <div class="muestra-color" style="background:#8b9b83"></div>
-              Verde suave
-            </div>
-            <div class="color-vestimenta">
-              <div class="muestra-color" style="background:#c5a77d"></div>
-              Beige
-            </div>
-          </div>
+          <p>
+            También les pedimos evitar el color <strong>vino</strong>.
+          </p>
+
+          <p>
+            Agradecemos mucho su comprensión y cariño.
+          </p>
         </div>
       </div>
     </section>
@@ -845,6 +823,7 @@
       <div class="contenido">
         <div class="sobrelinea">Planea tu visita</div>
         <h2>Opciones de hospedaje</h2>
+
         <p>
           Si necesitas hospedarte, puedes consultar alojamientos en estas
           zonas. Los enlaces muestran búsquedas en Google Maps; no son
@@ -852,35 +831,40 @@
         </p>
 
         <div class="lista-hoteles">
-          <a class="hotel-enlace"
-             href="https://www.google.com/maps/search/hoteles+San+Mateo+Atenco/"
-             target="_blank" rel="noopener noreferrer">
-            Hoteles en San Mateo Atenco ↗
-          </a>
+          <a
+            class="hotel-enlace"
+            href="https://www.google.com/maps/search/hoteles+San+Mateo+Atenco/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Hoteles en San Mateo Atenco ↗</a>
 
-          <a class="hotel-enlace"
-             href="https://www.google.com/maps/search/hoteles+Paseo+Tollocan+Toluca/"
-             target="_blank" rel="noopener noreferrer">
-            Hoteles en Paseo Tollocan ↗
-          </a>
+          <a
+            class="hotel-enlace"
+            href="https://www.google.com/maps/search/hoteles+Paseo+Tollocan+Toluca/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Hoteles en Paseo Tollocan ↗</a>
 
-          <a class="hotel-enlace"
-             href="https://www.google.com/maps/search/hoteles+cerca+del+Aeropuerto+de+Toluca/"
-             target="_blank" rel="noopener noreferrer">
-            Cerca del aeropuerto de Toluca ↗
-          </a>
+          <a
+            class="hotel-enlace"
+            href="https://www.google.com/maps/search/hoteles+cerca+del+Aeropuerto+de+Toluca/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Cerca del aeropuerto de Toluca ↗</a>
 
-          <a class="hotel-enlace"
-             href="https://www.google.com/maps/search/hoteles+Metepec+Estado+de+Mexico/"
-             target="_blank" rel="noopener noreferrer">
-            Hoteles en Metepec ↗
-          </a>
+          <a
+            class="hotel-enlace"
+            href="https://www.google.com/maps/search/hoteles+Metepec+Estado+de+Mexico/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Hoteles en Metepec ↗</a>
 
-          <a class="hotel-enlace"
-             href="https://www.google.com/maps/search/hoteles+Toluca+Estado+de+Mexico/"
-             target="_blank" rel="noopener noreferrer">
-            Hoteles en Toluca ↗
-          </a>
+          <a
+            class="hotel-enlace"
+            href="https://www.google.com/maps/search/hoteles+Toluca+Estado+de+Mexico/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Hoteles en Toluca ↗</a>
         </div>
       </div>
     </section>
@@ -891,12 +875,14 @@
       <div class="contenido">
         <div class="sobrelinea">Nos encantaría verte</div>
         <h2>Confirma tu asistencia</h2>
+
         <p>
           Ayúdanos a organizarnos confirmando si nos acompañarás.
         </p>
 
         <form class="formulario" id="formularioRSVP">
           <label for="nombreRSVP">Nombre completo</label>
+
           <input
             type="text"
             id="nombreRSVP"
@@ -908,6 +894,7 @@
           >
 
           <label for="asistentes">¿Cuántas personas asistirán?</label>
+
           <select id="asistentes" name="asistentes" required>
             <option value="">Selecciona una opción</option>
             <option value="1">1 persona</option>
@@ -936,6 +923,8 @@
 
   </main>
 
+  <!-- PIE DE PÁGINA -->
+
   <footer>
     <div class="sobrelinea">Con todo nuestro cariño</div>
     <div class="firma">María & Ricardo</div>
@@ -945,21 +934,24 @@
 
   <script>
     /*
-      CONFIGURA AQUÍ EL ENLACE REAL PARA SUBIR FOTOGRAFÍAS.
+      ARCHIVOS EN LA MISMA CARPETA:
+      index.html
+      fotoboda.jpeg
+      Musica.mpeg
+      qrboda.png
 
-      Ejemplo:
-      const PHOTO_UPLOAD_URL = "https://enlace-real-de-tu-album";
-
-      El QR qrboda.png también debe estar generado con ese mismo enlace.
-      No dejes el texto de ejemplo como si fuera una dirección real.
+      IMPORTANTE:
+      Configura PHOTO_UPLOAD_URL con el enlace real donde los invitados
+      podrán subir fotografías. El QR qrboda.png debe apuntar al mismo
+      enlace. Mostrar el QR no almacena las fotos por sí solo.
     */
 
     const PHOTO_UPLOAD_URL = "PEGA_AQUI_EL_ENLACE_REAL_DEL_ALBUM";
-
-    // Número de WhatsApp de los novios, con código de país.
     const WHATSAPP_NUMBER = "525638830474";
 
-    // Personalización: ejemplo ?invitado=Jesus%20Gerardo
+    // PERSONALIZACIÓN DEL INVITADO MEDIANTE LA URL
+    // Ejemplo: ?invitado=Jesus%20Gerardo
+
     const parametros = new URLSearchParams(window.location.search);
     const nombreInvitado = (parametros.get("invitado") || "").trim();
 
@@ -975,7 +967,8 @@
       nombrePortada.textContent = "Queridos familiares y amigos";
     }
 
-    // ABRIR INVITACIÓN Y ACTIVAR MÚSICA
+    // ABRIR INVITACIÓN Y REPRODUCIR MÚSICA
+
     const portada = document.getElementById("portada");
     const musica = document.getElementById("musicaBoda");
     const botonAbrir = document.getElementById("abrirInvitacion");
@@ -1004,12 +997,8 @@
       }
     });
 
-    musica.addEventListener("ended", () => {
-      botonMusica.textContent = "♫ Activar música";
-    });
+    // CUENTA REGRESIVA AL EVENTO
 
-    // CUENTA REGRESIVA
-    // Hora local de Toluca / Ciudad de México (UTC-6 en diciembre de 2026).
     const fechaEvento = new Date("2026-12-27T15:00:00-06:00");
 
     function actualizarContador() {
@@ -1026,13 +1015,18 @@
         return;
       }
 
-      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const dias = Math.floor(
+        diferencia / (1000 * 60 * 60 * 24)
+      );
+
       const horas = Math.floor(
         (diferencia / (1000 * 60 * 60)) % 24
       );
+
       const minutos = Math.floor(
         (diferencia / (1000 * 60)) % 60
       );
+
       const segundos = Math.floor(
         (diferencia / 1000) % 60
       );
@@ -1050,26 +1044,26 @@
     actualizarContador();
     setInterval(actualizarContador, 1000);
 
-    // ENLACE PARA COMPARTIR FOTOS
+    // ENLACE PARA SUBIR FOTOGRAFÍAS
+
     const botonSubirFotos = document.getElementById("botonSubirFotos");
 
     function configurarEnlaceFotos() {
-      const enlaceConfigurado =
-        PHOTO_UPLOAD_URL.startsWith("https://") ||
-        PHOTO_UPLOAD_URL.startsWith("http://");
+      const enlace = PHOTO_UPLOAD_URL.trim();
+      const enlaceValido = /^https?:\/\/\S+$/i.test(enlace);
 
-      if (enlaceConfigurado) {
-        botonSubirFotos.href = PHOTO_UPLOAD_URL;
-        botonSubirFotos.target = "_blank";
-        botonSubirFotos.removeAttribute("aria-disabled");
+      if (enlaceValido) {
+        botonSubirFotos.href = enlace;
       } else {
         botonSubirFotos.href = "#compartir-fotos";
+
         botonSubirFotos.addEventListener("click", (evento) => {
           evento.preventDefault();
+
           alert(
             "El álbum para compartir fotos todavía no está configurado. " +
-            "Primero agrega el enlace real en PHOTO_UPLOAD_URL y genera " +
-            "qrboda.png con ese mismo enlace."
+            "Agrega el enlace real en PHOTO_UPLOAD_URL y asegúrate de que " +
+            "qrboda.png apunte al mismo destino."
           );
         });
       }
@@ -1078,6 +1072,7 @@
     configurarEnlaceFotos();
 
     // CONFIRMACIÓN POR WHATSAPP
+
     document.getElementById("formularioRSVP").addEventListener(
       "submit",
       (evento) => {
@@ -1087,7 +1082,9 @@
         const asistentes = document.getElementById("asistentes").value;
 
         if (!nombre || !asistentes) {
-          alert("Por favor, escribe tu nombre y selecciona cuántas personas asistirán.");
+          alert(
+            "Por favor, escribe tu nombre y selecciona cuántas personas asistirán."
+          );
           return;
         }
 
