@@ -684,6 +684,32 @@
       font-size: 10px;
     }
 
+    .photos-section {
+      background: var(--crema);
+    }
+
+    .photo-share-card {
+      max-width: 590px;
+      margin: 28px auto 0;
+      padding: 28px;
+      border: 1px solid #d6bb82;
+      background: #fffaf3;
+    }
+
+    .photo-share-qr {
+      display: block;
+      width: min(260px, 100%);
+      height: auto;
+      margin: 22px auto;
+      border: 1px solid #d8c6a8;
+      background: #fff;
+      padding: 8px;
+    }
+
+    .photo-share-card .gold-button {
+      margin-top: 8px;
+    }
+
     .rsvp-section {
       background: #f0e4d3;
     }
@@ -1096,6 +1122,33 @@
       </div>
     </section>
 
+    <!-- COMPARTIR FOTOGRAFÍAS -->
+    <section class="content-section photos-section" id="fotos">
+      <div class="section-inner reveal">
+        <div class="section-kicker">Recuerdos de nuestro gran día</div>
+        <h2 class="section-title">Comparte tus fotografías</h2>
+        <div class="divider-ornament">♡</div>
+        <p class="section-copy">
+          Nos encantará conservar los recuerdos de este día tan especial.
+          Escanea el código QR o utiliza el botón para abrir el álbum y compartir
+          las fotografías que tomes durante la celebración.
+        </p>
+        <div class="photo-share-card">
+          <img class="photo-share-qr"
+               src="qrboda.png"
+               alt="Código QR para compartir fotografías de la boda"
+               loading="lazy">
+          <p class="small-note">
+            Si el código QR no funciona, puedes abrir el álbum con el siguiente botón.
+          </p>
+          <a class="gold-button" id="photoUploadButton"
+             href="#fotos" target="_blank" rel="noopener noreferrer">
+            Compartir fotografías ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
     <!-- CONFIRMACIÓN POR WHATSAPP -->
     <section class="content-section rsvp-section" id="confirmar">
       <div class="section-inner reveal">
@@ -1282,6 +1335,22 @@
 
     actualizarCuenta();
     window.setInterval(actualizarCuenta, 1000);
+
+    // ÁLBUM PARA COMPARTIR FOTOGRAFÍAS
+    // Sustituye este texto por el enlace real del álbum compartido (por ejemplo, Google Drive).
+    const PHOTO_UPLOAD_URL = 'PEGA_AQUI_EL_ENLACE_REAL_DEL_ALBUM';
+    const photoUploadButton = document.getElementById('photoUploadButton');
+
+    photoUploadButton.addEventListener('click', (event) => {
+      if (!PHOTO_UPLOAD_URL || PHOTO_UPLOAD_URL === 'PEGA_AQUI_EL_ENLACE_REAL_DEL_ALBUM') {
+        event.preventDefault();
+        alert('El álbum de fotografías todavía no está configurado. Agrega el enlace del álbum en la variable PHOTO_UPLOAD_URL del archivo index.html.');
+        return;
+      }
+
+      event.preventDefault();
+      window.open(PHOTO_UPLOAD_URL, '_blank', 'noopener,noreferrer');
+    });
 
     // CONFIRMACIÓN DE ASISTENCIA POR WHATSAPP
     document.getElementById('rsvpForm').addEventListener('submit', (event) => {
